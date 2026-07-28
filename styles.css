@@ -82,10 +82,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .comparison-base { position: absolute; inset: 0; }
 .comparison-after { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 42% 0 0); }
 .comparison-after img { position: absolute; inset: 0; }
-.comparison-handle { position: absolute; z-index: 4; top: 0; bottom: 0; left: 58%; width: 2px; background: rgba(255,255,255,.88); pointer-events: none; transform: translateX(-1px); }
-.comparison-handle span { position: absolute; top: 54%; left: 50%; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; color: var(--navy); background: var(--white); box-shadow: 0 10px 24px rgba(0,0,0,.26); transform: translate(-50%,-50%); }
+.comparison-handle { position: absolute; z-index: 9; top: 0; bottom: 0; left: 58%; width: 48px; cursor: ew-resize; touch-action: none; transform: translateX(-50%); }
+.comparison-handle::before { content: ""; position: absolute; inset: 0 auto 0 50%; width: 2px; background: rgba(255,255,255,.88); transform: translateX(-50%); }
+.comparison-handle span { position: absolute; top: 54%; left: 50%; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; color: var(--navy); background: var(--white); box-shadow: 0 10px 24px rgba(0,0,0,.26); pointer-events: none; transform: translate(-50%,-50%); }
 .comparison-handle svg { width: 22px; height: 22px; }
-.comparison-range { position: absolute; z-index: 6; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.comparison-range { position: absolute; z-index: 6; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
 .comparison-range:focus-visible { outline: none; }
 .comparison:has(.comparison-range:focus-visible) .comparison-handle span { outline: 3px solid var(--orange); outline-offset: 4px; }
 .comparison-label { position: absolute; z-index: 5; bottom: 64px; padding: 7px 10px; border-radius: 3px; color: var(--white); background: rgba(7,28,48,.76); font-family: var(--utility); font-size: 11px; font-weight: 700; pointer-events: none; }
@@ -99,7 +100,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero h1 { margin: 0; font-family: var(--display); font-size: 76px; line-height: .98; font-weight: 900; letter-spacing: 0; }
 .hero-name-en { margin: 9px 0 0; font-family: var(--utility); font-size: 16px; font-weight: 700; }
 .hero-role { max-width: 16em; margin: 16px 0 0; font-family: var(--display); font-size: 30px; line-height: 1.25; font-weight: 800; }
-.hero-academic { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 0; margin-top: 18px; border-left: 3px solid var(--orange); background: rgba(7,28,48,.5); }
+.hero-academic { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 0; margin-top: 18px; background: rgba(7,28,48,.5); }
+.hero-academic::before { content: ""; position: absolute; left: 0; top: 0; width: 28px; height: 2px; background: var(--orange); }
 .hero-academic span { padding: 5px 12px; border-right: 1px solid rgba(255,255,255,.32); font-size: 12px; }
 .hero-academic span:last-child { border-right: 0; }
 .hero-academic strong { color: #ffd18f; }
@@ -290,7 +292,7 @@ figcaption { color: var(--muted); font-size: 12px; }
   .comparison-label-before { left: 16px; }
   .comparison-label-after { right: 16px; }
   .hero-caption { left: 16px; right: 16px; bottom: 14px; text-align: right; }
-  .comparison-handle span { top: 45%; width: 42px; height: 42px; }
+  .comparison-handle span { top: 23%; width: 42px; height: 42px; }
   .section { padding: 84px 0; }
   .section-inner { width: calc(100% - 32px); }
   .section h2, .d4rt h2 { font-size: 38px; }

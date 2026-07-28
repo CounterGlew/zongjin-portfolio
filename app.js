@@ -41,6 +41,35 @@
       after.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
       handle.style.left = `${value}%`;
     };
+
+    const updateFromPointer = (clientX) => {
+      const bounds = comparison.getBoundingClientRect();
+      const value = Math.min(100, Math.max(0, ((clientX - bounds.left) / bounds.width) * 100));
+      range.value = String(value);
+      update();
+    };
+
+    handle.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      handle.setPointerCapture(event.pointerId);
+      updateFromPointer(event.clientX);
+    });
+
+    handle.addEventListener('pointermove', (event) => {
+      if (!handle.hasPointerCapture(event.pointerId)) return;
+      updateFromPointer(event.clientX);
+    });
+
+    const finishDrag = (event) => {
+      if (!handle.hasPointerCapture(event.pointerId)) return;
+      updateFromPointer(event.clientX);
+      handle.releasePointerCapture(event.pointerId);
+      range.focus({ preventScroll: true });
+    };
+
+    handle.addEventListener('pointerup', finishDrag);
+    handle.addEventListener('pointercancel', finishDrag);
     range.addEventListener('input', update);
     update();
   });
